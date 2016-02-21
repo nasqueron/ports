@@ -4,7 +4,7 @@
 # This port is a part of Nasqueron operations FreeBSD internal ports tree.
 
 PORTNAME=	notifications-cli-client
-DISTVERSION=	2016-02-21
+PORTVERSION=0.3.0
 CATEGORIES=	devel
 DISTNAME=	${PORTNAME}
 
@@ -17,7 +17,7 @@ RUN_DEPENDS=	${PYTHON_SITELIBDIR}/pika/amqp_object.py:${PORTSDIR}/devel/py-pika
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	nasqueron
-GH_TAGNAME=	14aba99
+GH_TAGNAME=	v${PORTVERSION}
 
 USES=		python:3.4+
 NO_BUILD=	yes
