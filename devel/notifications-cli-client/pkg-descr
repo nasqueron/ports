@@ -1,0 +1,5 @@
+Client to connect to an AMQP broker to print notifications to the console.
+
+Intended to be used with the Nasqueron notifications center.
+
+WWW: https://github.com/nasqueron/notifications-cli-client
