@@ -13,7 +13,7 @@ COMMENT=	Prints notifications to the console
 
 LICENSE=	BSD2CLAUSE
 
-RUN_DEPENDS=	${PYTHON_SITELIBDIR}/pika/amqp_object.py:${PORTSDIR}/devel/py-pika
+RUN_DEPENDS=	${PYTHON_SITELIBDIR}/pika/amqp_object.py:devel/py-pika
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	nasqueron
