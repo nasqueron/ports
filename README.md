@@ -1,18 +1,20 @@
-### Nasqueron FreeBSD ports
+## Nasqueron FreeBSD ports
 
-This repository contains internal FreeBSD ports to deploy
-specific Nasqueron software we don't intend to upstream to
-the official FreeBSD ports tree.
+This port tree is the source of truth for the Nasqueron packages repository,
+FreeBSD section, at https://packages.nasqueron.org/freebsd/
 
-The idea is to provide a port for each application used:
+It contains two kind of ports:
 
- - if this is a global one, the ports should go to the FreeBSD ports tree
- - if this is a local one, commit the port here
+  i.   ports submitted upstream, not yet published
+  ii.  ports specific to Nasqueron infrastructure or software
 
-#### How to add a new port
+Any port installed on Nasqueron servers as documented on operations repository
+should exist in the FreeBSD ports repository or in this repository.
+
+### How to add a new port
 
 Follow the [FreeBSD porters handbook](https://www.freebsd.org/doc/en/books/porters-handbook/)
-or require assistance on Freenode #nasqueron-ops.
+or require assistance on Libera #nasqueron-ops.
 
 Send your commit for review to DevCentral (our Phabricator instance).
 The procedure is explained in our [How to contribute code](https://agora.nasqueron.org/How_to_contribute_code) guide.
