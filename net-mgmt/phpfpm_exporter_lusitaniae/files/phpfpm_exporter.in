@@ -1,0 +1,56 @@
+#!/bin/sh
+
+# PROVIDE: phpfpm_exporter
+# REQUIRE: DAEMON
+# KEYWORD: shutdown
+#
+# Add the following lines to /etc/rc.conf.local or /etc/rc.conf
+# to enable this service:
+#
+# phpfpm_exporter_enable (bool):	Set it to YES to enable phpfpm_exporter.
+#					Default is "NO".
+# phpfpm_exporter_user (user):	Set user to run phpfpm_exporter.
+#				That user needs read access to php-fpm sockets.
+#				Default is "nobody".
+# phpfpm_exporter_sockets_root (path):	Set the root directory where to find php-fpm sockets.
+#					Default is "/var/run".
+# phpfpm_exporter_sockets_pattern (path):	Set the pattern to match php-fpm sockets paths.
+#						Default is "php-fpm.sock".
+# phpfpm_exporter_status (string):	Set to the php-fpm pm.status_path value.
+#					Default is "/status".
+# phpfpm_exporter_address (string):	Set the address listened by metrics exporter.
+#					Default is "127.0.0.1:9253"
+
+. /etc/rc.subr
+
+name=phpfpm_exporter
+rcvar=phpfpm_exporter_enable
+
+load_rc_config $name
+
+: ${phpfpm_exporter_enable:="NO"}
+: ${phpfpm_exporter_user:="nobody"}
+: ${phpfpm_exporter_sockets_root:="/var/run"}
+: ${phpfpm_exporter_sockets_pattern:="php-fpm.sock"}
+: ${phpfpm_exporter_status:="/status"}
+: ${phpfpm_exporter_address:="127.0.0.1:9253"}
+
+sockets_found=$(find "${phpfpm_exporter_sockets_root}" -type s -name "${phpfpm_exporter_sockets_pattern}" -print0 | xargs -0 -n1 echo --phpfpm.socket-paths | paste -sd " " -)
+
+phpfpm_exporter_args="--web.listen-address=${phpfpm_exporter_address} --phpfpm.status-path=${phpfpm_exporter_status}"
+
+pidfile=/var/run/phpfpm_exporter.pid
+procname="phpfpm_exporter"
+command="/usr/sbin/daemon"
+command_args="-f -t ${name} -p ${pidfile} ${procname} ${phpfpm_exporter_args} ${sockets_found}"
+
+start_precmd=phpfpm_exporter_startprecmd
+required_files="$phpfpm_exporter_config"
+
+phpfpm_exporter_startprecmd()
+{
+	touch ${pidfile}
+	chown ${phpfpm_exporter_user} ${pidfile}
+}
+
+run_rc_command "$1"

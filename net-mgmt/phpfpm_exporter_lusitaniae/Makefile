@@ -31,6 +31,8 @@ GH_TUPLE=	\
 		tomasen:fcgi_client:2bb3d819fd19:tomasen_fcgi_client/vendor/github.com/tomasen/fcgi_client
 GO_TARGET=	:phpfpm_exporter
 
+USE_RC_SUBR=	phpfpm_exporter
+
 CONFLICTS=	phpfpm_exporter
 
 PLIST_FILES=	bin/phpfpm_exporter
